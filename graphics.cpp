@@ -1,12 +1,28 @@
 #include "graphics.h"
-#include "cube.h"
+#include "item.h"
+#include "rock.h"
+#include "paper.h"
+#include "scissors.h"
 #include <iostream>
 #include <vector>
+#include <GL/glut.h>
 using namespace std;
 
 GLdouble width, height;
 int wd;
-Cube c;
+Rock p1_r;
+Paper p1_p;
+Scissors p1_s;
+Rock p2_r;
+Paper p2_p;
+Scissors p2_s;
+bool draw_p1_rock = false;
+bool draw_p1_paper = false;
+bool draw_p1_scissors = false;
+bool draw_p2_rock = false;
+bool draw_p2_paper = false;
+bool draw_p2_scissors = false;
+bool show_round = false;
 
 void init() {
     width = 500;
@@ -25,7 +41,7 @@ void initGL() {
               0.0, 1.0, 0.0); // up vector
 }
 
-void draw_axes() {
+/*void draw_axes() {
     glLineWidth(2.0);
     glBegin(GL_LINES);
     glColor3f(1.0, 0.0, 0.0);
@@ -39,6 +55,7 @@ void draw_axes() {
     glVertex3f(0.0, 0.0, -width);
     glEnd();
 }
+ */
 
 /* Handler for window-repaint event. Call back when the window first appears and
  whenever the window needs to be re-painted. */
@@ -47,7 +64,7 @@ void display() {
     // tell OpenGL to use the whole window for drawing
     glViewport(0, 0, width, height);
 
-    glMatrixMode(GL_PROJECTION);
+    glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
     glOrtho(-width/2, width/2, -height/2, height/2, -width, width);
     
@@ -60,8 +77,20 @@ void display() {
     /*
      * Draw here
      */
-    draw_axes();
-    c.draw();
+    if(show_round){
+        if(draw_p1_rock)
+            p1_r.draw();
+        if(draw_p1_paper)
+            p1_p.draw();
+        if(draw_p1_scissors)
+            p1_s.draw();
+        if(draw_p2_rock)
+            p2_r.draw();
+        if(draw_p2_paper)
+            p2_p.draw();
+        if(draw_p2_scissors)
+            p2_s.draw();
+    }
     
     glFlush();  // Render now
 }
@@ -75,16 +104,19 @@ void kbd(unsigned char key, int x, int y) {
     }
 
     switch(key) {
-        case 'x': c.rotate(PI / 100.0, 0, 0);
+        case 'a':
+            draw_p1_rock = true;
             break;
-        case 'z': c.rotate(0,PI / 100.0, 0);
+        case 's':
+            draw_p1_paper = true;
             break;
-        case 'y': c.rotate(0,0,PI / 100);
+        case 'd':
+            draw_p1_scissors = true;
             break;
-        case 'g': c.mutate(2);
+        case 'p':
+            show_round = true;
             break;
-        case 's': c.mutate(-2);
-            break;
+
     }
     
     glutPostRedisplay();
@@ -92,23 +124,14 @@ void kbd(unsigned char key, int x, int y) {
 
 void kbdS(int key, int x, int y) {
     switch(key) {
-        case GLUT_KEY_DOWN:
-            c.move(0,-5,0);
-            break;
         case GLUT_KEY_LEFT:
-            c.move(-5, 0, 0);
+            draw_p2_rock = true;
+            break;
+        case GLUT_KEY_DOWN:
+            draw_p2_paper = true;
             break;
         case GLUT_KEY_RIGHT:
-            c.move(5, 0, 0);
-            break;
-        case GLUT_KEY_UP:
-            c.move(0,5,0);
-            break;
-        case GLUT_KEY_F11:
-            c.move(0,0,5);
-            break;
-        case GLUT_KEY_F12:
-            c.move(0,0,-5);
+            draw_p2_scissors = true;
             break;
     }
     

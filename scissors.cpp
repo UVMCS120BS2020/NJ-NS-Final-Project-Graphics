@@ -11,10 +11,10 @@ Scissors::Scissors() {
     color = "red";
     timesWon = 0;
     verteces.resize(13);
-    verteces[0] = {50,50};
-    verteces[1] = {50,70};
-    verteces[2] = {70,70};
-    verteces[3] = {70,50};
+    verteces[0] = {100,0};
+    verteces[1] = {70,0};
+    verteces[2] = {70,50};
+    verteces[3] = {100,50};
 }
 
 string Scissors::getColor() const{
@@ -34,9 +34,11 @@ void Scissors::setTimesWon(int w){
 }
 
 void Scissors::draw() const {
+    glBegin(GL_QUADS);
     glColor3f(1, 0, 0);
     draw_point(verteces[0]);
-    draw_point(verteces[1]);
     draw_point(verteces[3]);
     draw_point(verteces[2]);
+    draw_point(verteces[1]);
+    glEnd();
 }
