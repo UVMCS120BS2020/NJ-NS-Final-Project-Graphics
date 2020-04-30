@@ -37,7 +37,7 @@ void Scissors::setVerteces(vector<point> vs){
 }
 
 void Scissors::draw() const {
-#ifdef __APPLE__:
+#ifdef __APPLE__
     glBegin(GL_TRIANGLE_FAN);
     glColor3f(1, 1, 1);
     draw_point(verteces[4]);
