@@ -5,7 +5,7 @@
 #include "scissors.h"
 #include <iostream>
 #include <vector>
-#include <GL/glut.h>
+
 using namespace std;
 
 GLdouble width, height;
