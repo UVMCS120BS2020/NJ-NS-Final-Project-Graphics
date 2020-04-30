@@ -6,6 +6,7 @@
 #include <memory>
 #include <iostream>
 #include <vector>
+#include <bits/stdc++.h>
 //#include <GL/freeglut.h>
 
 using namespace std;
@@ -27,6 +28,7 @@ bool draw_p2_paper = false;
 bool draw_p2_scissors = false;
 bool p1_chose = false;
 bool p2_chose = false;
+bool increment = false;
 int p1_wins = 0;
 int p2_wins = 0;
 char p1_choice;
@@ -82,19 +84,19 @@ void display() {
      * Draw here
      */
 
+    glColor3f(1.0,1.0,1.0);
     PrintString(-100, 200, GLUT_BITMAP_8_BY_13, reinterpret_cast<const unsigned char *>("Rock Paper scissors!"));
     PrintString(-160, 185, GLUT_BITMAP_8_BY_13, reinterpret_cast<const unsigned char *>("Player 1: a = rock s = paper d = scissors"));
     PrintString(-170, 170, GLUT_BITMAP_8_BY_13, reinterpret_cast<const unsigned char *>("Player 2: <- = rock V = paper -> = scissors"));
     PrintString(-170, 155, GLUT_BITMAP_8_BY_13, reinterpret_cast<const unsigned char *>("When round is over, press c to clear the board"));
 
+    string l = to_string(p1_wins);
+    string f = to_string(p2_wins);
 
-    PrintString(-170, 110, GLUT_BITMAP_8_BY_13, reinterpret_cast<const unsigned char *>("Player 1"));
-    //if(p1_wins < 0)
-    //    PrintString(-60+(p1_wins*13), 120, GLUT_BITMAP_8_BY_13, reinterpret_cast<const unsigned char *>("|"));
-    PrintString(70, 110, GLUT_BITMAP_8_BY_13, reinterpret_cast<const unsigned char *>("Player 2"));
-    //if(p2_wins > 0)
-    //    PrintString(180+(p2_wins*13), 120, GLUT_BITMAP_8_BY_13, reinterpret_cast<const unsigned char *>("|"));
-
+    PrintString(-170, 110, GLUT_BITMAP_8_BY_13, reinterpret_cast<const unsigned char *>("Player 1 wins: "));
+    PrintString(-55, 110, GLUT_BITMAP_8_BY_13, reinterpret_cast<const unsigned char *>(l.c_str()));
+    PrintString(70, 110, GLUT_BITMAP_8_BY_13, reinterpret_cast<const unsigned char *>("Player 2 wins: "));
+    PrintString(185, 110, GLUT_BITMAP_8_BY_13, reinterpret_cast<const unsigned char *> (f.c_str()));
 
 
     if(p1_chose && p2_chose){
@@ -123,38 +125,54 @@ void display() {
             p2_choice = 's';
         }
 
+        glColor3f(1.0,1.0,1.0);
         switch(p1_choice){
             case 'r':
                 if(p2_choice == 'r') {
                     PrintString(-200, -200, GLUT_BITMAP_8_BY_13, reinterpret_cast<const unsigned char *>("Draw!"));
+                    increment = false;
                 } else if(p2_choice == 'p'){
                     PrintString(-200, -200, GLUT_BITMAP_8_BY_13,reinterpret_cast<const unsigned char *>("Player 2 wins!"));
-                    p2_wins++;
+                    if(increment)
+                        p2_wins++;
+                    increment = false;
                 } else{
                     PrintString(-200, -200, GLUT_BITMAP_8_BY_13,reinterpret_cast<const unsigned char *>("Player 1 wins!"));
+                    if(increment)
                     p1_wins++;
+                        increment = false;
                 }
                 break;
             case 'p':
                 if(p2_choice == 'r') {
                     PrintString(-200, -200, GLUT_BITMAP_8_BY_13,reinterpret_cast<const unsigned char *>("Player 1 wins!"));
-                    p1_wins++;
+                    if(increment)
+                        p1_wins++;
+                    increment = false;
                 } else if(p2_choice == 'p'){
                     PrintString(-200, -200, GLUT_BITMAP_8_BY_13, reinterpret_cast<const unsigned char *>("Draw!"));
+                    increment = false;
                 } else{
                     PrintString(-200, -200, GLUT_BITMAP_8_BY_13,reinterpret_cast<const unsigned char *>("Player 2 wins!"));
-                    p2_wins++;
+                    if(increment)
+                        p2_wins++;
+                    increment = false;
                 }
                 break;
             case 's':
                 if(p2_choice == 'r') {
                     PrintString(-200, -200, GLUT_BITMAP_8_BY_13,reinterpret_cast<const unsigned char *>("Player 2 wins!"));
-                    p2_wins++;
+                    if(increment)
+                        p2_wins++;
+                    increment = false;
                 } else if(p2_choice == 'p'){
                     PrintString(-200, -200, GLUT_BITMAP_8_BY_13,reinterpret_cast<const unsigned char *>("Player 1 wins!"));
-                    p1_wins++;
+                    if(increment)
+                        p1_wins++;
+                    increment = false;
                 } else{
                     PrintString(-200, -200, GLUT_BITMAP_8_BY_13, reinterpret_cast<const unsigned char *>("Draw!"));
+                    increment = false;
                 }
                 break;
         }
@@ -175,18 +193,21 @@ void kbd(unsigned char key, int x, int y) {
             if(!p1_chose) {
                 draw_p1_rock = true;
                 p1_chose = true;
+                increment = true;
             }
             break;
         case 's':
             if(!p1_chose){
                     draw_p1_paper = true;
                     p1_chose = true;
+                    increment = true;
             }
             break;
         case 'd':
             if(!p1_chose) {
                 draw_p1_scissors = true;
                 p1_chose = true;
+                increment = true;
             }
             break;
         case 'c':
@@ -211,18 +232,21 @@ void kbdS(int key, int x, int y) {
             if(!p2_chose) {
                 draw_p2_rock = true;
                 p2_chose = true;
+                increment = true;
             }
             break;
         case GLUT_KEY_DOWN:
             if(!p2_chose) {
                 draw_p2_paper = true;
                 p2_chose = true;
+                increment = true;
             }
             break;
         case GLUT_KEY_RIGHT:
             if(!p2_chose) {
                 draw_p2_scissors = true;
                 p2_chose = true;
+                increment = true;
             }
             break;
     }
