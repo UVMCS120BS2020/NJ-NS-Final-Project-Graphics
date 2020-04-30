@@ -97,31 +97,37 @@ void display() {
     if(p1_chose && p2_chose){
         if(draw_p1_rock) {
             items_vec[0]->draw();
+            glColor3f(1.0,1.0,1.0);
             PrintString(-130, -50, GLUT_BITMAP_8_BY_13, reinterpret_cast<const unsigned char *>("Rock"));
             p1_choice = 'r';
         }
         if(draw_p1_paper) {
             items_vec[1]->draw();
+            glColor3f(1.0,1.0,1.0);
             PrintString(-130, -50, GLUT_BITMAP_8_BY_13, reinterpret_cast<const unsigned char *>("Paper"));
             p1_choice = 'p';
         }
         if(draw_p1_scissors) {
             items_vec[2]->draw();
-            PrintString(130, -50, GLUT_BITMAP_8_BY_13, reinterpret_cast<const unsigned char *>("Scissors"));
+            glColor3f(1.0,1.0,1.0);
+            PrintString(-130, -50, GLUT_BITMAP_8_BY_13, reinterpret_cast<const unsigned char *>("Scissors"));
             p1_choice = 's';
         }
         if(draw_p2_rock) {
             items_vec[3]->draw();
+            glColor3f(1.0,1.0,1.0);
             PrintString(90, -50, GLUT_BITMAP_8_BY_13, reinterpret_cast<const unsigned char *>("Rock"));
             p2_choice = 'r';
         }
         if(draw_p2_paper) {
             items_vec[4]->draw();
+            glColor3f(1.0,1.0,1.0);
             PrintString(90, -50, GLUT_BITMAP_8_BY_13, reinterpret_cast<const unsigned char *>("Paper"));
             p2_choice = 'p';
         }
         if(draw_p2_scissors) {
             items_vec[5]->draw();
+            glColor3f(1.0,1.0,1.0);
             PrintString(90, -50, GLUT_BITMAP_8_BY_13, reinterpret_cast<const unsigned char *>("Scissors"));
             p2_choice = 's';
         }
