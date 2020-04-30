@@ -8,7 +8,7 @@
 using namespace std;
 
 Scissors::Scissors() {
-    color = "red";
+    color = "black";
     verteces.resize(21);
     verteces[0] = {-50,5};
     verteces[1] = {-180,-10};
@@ -51,9 +51,12 @@ void Scissors::draw() const {
     glBegin(GL_TRIANGLE_FAN);
     glColor3f(1, 1, 1);
     draw_point(verteces[4]);
+    glColor3f(0.8, 0.8, 0.8);
     draw_point(verteces[1]);
+    glColor3f(0.7, 0.7, 0.7);
     draw_point(verteces[0]);
     draw_point(verteces[2]);
+    glColor3f(1, 1, 1);
     draw_point(verteces[3]);
     glEnd();
 
@@ -112,9 +115,12 @@ void Scissors::draw() const {
     glBegin(GL_TRIANGLE_FAN);
     glColor3f(1, 1, 1);
     draw_point(verteces[4]);
+    glColor3f(0.8, 0.8, 0.8);
     draw_point(verteces[1]);
+    glColor3f(0.7, 0.7, 0.7);
     draw_point(verteces[0]);
     draw_point(verteces[2]);
+    glColor3f(1, 1, 1);
     draw_point(verteces[3]);
     glEnd();
 #endif
