@@ -107,7 +107,7 @@ void display() {
         }
         if(draw_p1_scissors) {
             items_vec[2]->draw();
-            PrintString(-130, -50, GLUT_BITMAP_8_BY_13, reinterpret_cast<const unsigned char *>("Scissors"));
+            PrintString(130, -50, GLUT_BITMAP_8_BY_13, reinterpret_cast<const unsigned char *>("Scissors"));
             p1_choice = 's';
         }
         if(draw_p2_rock) {
