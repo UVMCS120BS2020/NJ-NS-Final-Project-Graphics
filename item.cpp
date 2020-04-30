@@ -8,6 +8,7 @@
 Item::Item(){
     player = 0;
     verteces.clear();
+    verteces.resize(30);
 }
 
 void Item :: draw_point(const point &p) const {
