@@ -130,12 +130,12 @@ void display() {
         switch(p1_choice){
             case 'r':
                 if(p2_choice == 'r') {
-                    PrintString(-200, -200, GLUT_BITMAP_8_BY_13, reinterpret_cast<const unsigned char *>("Draw!"));
+                    PrintString(-20, -110, GLUT_BITMAP_8_BY_13, reinterpret_cast<const unsigned char *>("Draw!"));
                 } else if(p2_choice == 'p'){
-                    PrintString(-200, -200, GLUT_BITMAP_8_BY_13,reinterpret_cast<const unsigned char *>("Player 2 wins!"));
+                    PrintString(-20, -110, GLUT_BITMAP_8_BY_13,reinterpret_cast<const unsigned char *>("Player 2 wins!"));
                     p2_wins++;
                 } else{
-                    PrintString(-200, -200, GLUT_BITMAP_8_BY_13,reinterpret_cast<const unsigned char *>("Player 1 wins!"));
+                    PrintString(-20, -110, GLUT_BITMAP_8_BY_13,reinterpret_cast<const unsigned char *>("Player 1 wins!"));
                     p1_wins++;
                 }
                 break;
