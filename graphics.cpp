@@ -168,16 +168,22 @@ void kbd(unsigned char key, int x, int y) {
 
     switch(key) {
         case 'a':
-            draw_p1_rock = true;
-            p1_chose = true;
+            if(!p1_chose) {
+                draw_p1_rock = true;
+                p1_chose = true;
+            }
             break;
         case 's':
-            draw_p1_paper = true;
-            p1_chose = true;
+            if(!p1_chose){
+                    draw_p1_paper = true;
+                    p1_chose = true;
+            }
             break;
         case 'd':
-            draw_p1_scissors = true;
-            p1_chose = true;
+            if(!p1_chose) {
+                draw_p1_scissors = true;
+                p1_chose = true;
+            }
             break;
         case 'c':
             p1_chose = false;
@@ -198,16 +204,22 @@ void kbd(unsigned char key, int x, int y) {
 void kbdS(int key, int x, int y) {
     switch(key) {
         case GLUT_KEY_LEFT:
-            draw_p2_rock = true;
-            p2_chose = true;
+            if(!p2_chose) {
+                draw_p2_rock = true;
+                p2_chose = true;
+            }
             break;
         case GLUT_KEY_DOWN:
-            draw_p2_paper = true;
-            p2_chose = true;
+            if(!p2_chose) {
+                draw_p2_paper = true;
+                p2_chose = true;
+            }
             break;
         case GLUT_KEY_RIGHT:
-            draw_p2_scissors = true;
-            p2_chose = true;
+            if(!p2_chose) {
+                draw_p2_scissors = true;
+                p2_chose = true;
+            }
             break;
     }
     
