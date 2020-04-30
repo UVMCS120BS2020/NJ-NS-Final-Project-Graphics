@@ -10,7 +10,6 @@ using namespace std;
 
 Paper::Paper() {
     color = "white";
-    timesWon = 0;
     verteces.resize(13);
     verteces[0] = {-110,0};
     verteces[1] = {-140,0};
@@ -24,14 +23,6 @@ vector<point> Paper::getVerteces(){
 
 void Paper::setVerteces(vector<point> vs){
     verteces = vs;
-}
-
-int Paper::getTimesWon() const{
-    return timesWon;
-}
-
-void Paper::setTimesWon(int w){
-    timesWon = w;
 }
 
 void Paper::draw() const {

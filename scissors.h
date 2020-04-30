@@ -11,7 +11,6 @@
 class Scissors : public Item {
 private:
     std::string color;
-    int timesWon;
 
 public:
     Scissors();
@@ -20,9 +19,6 @@ public:
 
     void setVerteces(std::vector<point> vs);
 
-    int getTimesWon() const;
-
-    void setTimesWon(int w);
 
     void draw() const override;
 

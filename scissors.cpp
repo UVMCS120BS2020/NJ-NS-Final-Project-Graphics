@@ -9,7 +9,6 @@ using namespace std;
 
 Scissors::Scissors() {
     color = "red";
-    timesWon = 0;
     verteces.resize(13);
     verteces[0] = {-50,5};
     verteces[1] = {-180,-10};
@@ -40,14 +39,6 @@ vector<point> Scissors::getVerteces(){
 
 void Scissors::setVerteces(vector<point> vs){
     verteces = vs;
-}
-
-int Scissors::getTimesWon() const{
-    return timesWon;
-}
-
-void Scissors::setTimesWon(int w){
-    timesWon = w;
 }
 
 void Scissors::draw() const {

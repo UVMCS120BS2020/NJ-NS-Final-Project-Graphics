@@ -10,7 +10,6 @@ using namespace std;
 
 Rock::Rock() {
     color = "grey";
-    timesWon = 0;
     verteces.resize(13);
     verteces[0] = {-50,0};
     verteces[1] = {-180,0};
@@ -29,14 +28,6 @@ vector<point> Rock::getVerteces(){
 
 void Rock::setVerteces(vector<point> vs){
     verteces = vs;
-}
-
-int Rock::getTimesWon() const{
-    return timesWon;
-}
-
-void Rock::setTimesWon(int w){
-    timesWon = w;
 }
 
 void Rock::draw() const {

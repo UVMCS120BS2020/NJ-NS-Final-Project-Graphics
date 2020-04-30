@@ -11,7 +11,6 @@
 class Rock : public Item {
 private:
     std::string color;
-    int timesWon;
 
 public:
     Rock();
@@ -19,10 +18,6 @@ public:
     std::vector<point> getVerteces();
 
     void setVerteces(std::vector<point> vs);
-
-    int getTimesWon() const;
-
-    void setTimesWon(int w);
 
     void draw() const override;
 
