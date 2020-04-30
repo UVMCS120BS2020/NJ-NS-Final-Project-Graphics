@@ -9,7 +9,7 @@ using namespace std;
 
 Scissors::Scissors() {
     color = "red";
-    verteces.resize(13);
+    verteces.resize(20);
     verteces[0] = {-50,5};
     verteces[1] = {-180,-10};
     verteces[2] = {-50,25};
@@ -25,11 +25,6 @@ Scissors::Scissors() {
     verteces[10] = {-55,40};
     verteces[11] = {-55,25};
     verteces[12] = {-40,25};
-
-    verteces[13] = {-135,-15};
-    verteces[14] = {-160,10};
-    verteces[15] = {-160,10};
-    verteces[16] = {-135,-15};
 
 }
 
@@ -67,12 +62,5 @@ void Scissors::draw() const {
     draw_point(verteces[12]);
     glEnd();
 
-    glBegin(GL_QUADS);
-    glColor3f(0.4, 0.4, 0.4);
-    draw_point(verteces[13]);
-    draw_point(verteces[14]);
-    draw_point(verteces[15]);
-    draw_point(verteces[16]);
-    glEnd();
 
 }

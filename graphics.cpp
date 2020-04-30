@@ -6,7 +6,8 @@
 #include <memory>
 #include <iostream>
 #include <vector>
-#include <GL/freeglut.h>
+//#include <OpenGL/freeglut.h>
+
 using namespace std;
 
 GLdouble width, height;
@@ -42,7 +43,7 @@ void PrintString(float x, float y, void *font, const unsigned char* string){
     char *c;
     glColor3f(1.0, 1.0, 1.0);
     glRasterPos2f(x,y);
-    glutBitmapString(font,string);
+//glutBitmapString(font,string);
 }
 
 /* Initialize OpenGL Graphics */
