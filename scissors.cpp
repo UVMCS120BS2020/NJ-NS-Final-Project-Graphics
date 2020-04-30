@@ -10,10 +10,12 @@ using namespace std;
 Scissors::Scissors() {
     color = "red";
     verteces.resize(13);
-    verteces[0] = {-70,0};
-    verteces[1] = {-100,0};
-    verteces[2] = {-100,30};
-    verteces[3] = {-70,30};
+    verteces[0] = {-50,-10};
+    verteces[1] = {-180,-10};
+    verteces[2] = {-50,40};
+    verteces[3] = {-180,40};
+    verteces[4] = {-130,15};
+
 }
 
 vector<point> Scissors::getVerteces(){
@@ -25,11 +27,13 @@ void Scissors::setVerteces(vector<point> vs){
 }
 
 void Scissors::draw() const {
-    glBegin(GL_QUADS);
+    glBegin(GL_TRIANGLE_FAN);
     glColor3f(1, 0, 0);
     draw_point(verteces[0]);
-    draw_point(verteces[3]);
-    draw_point(verteces[2]);
     draw_point(verteces[1]);
+    draw_point(verteces[4]);
+    draw_point(verteces[2]);
+    draw_point(verteces[3]);
+
     glEnd();
 }
