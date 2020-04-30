@@ -9,7 +9,7 @@ using namespace std;
 
 Scissors::Scissors() {
     color = "red";
-    verteces.resize(20);
+    verteces.resize(21);
     verteces[0] = {-50,5};
     verteces[1] = {-180,-10};
     verteces[2] = {-50,25};
@@ -26,6 +26,16 @@ Scissors::Scissors() {
     verteces[11] = {-55,25};
     verteces[12] = {-40,25};
 
+    verteces[13] = {-35,15};
+    verteces[14] = {-60,15};
+    verteces[15] = {-60,-10};
+    verteces[16] = {-35,-10};
+
+    verteces[17] = {-40,10};
+    verteces[18] = {-55,10};
+    verteces[19] = {-55,-5};
+    verteces[20] = {-40,-5};
+
 }
 
 vector<point> Scissors::getVerteces(){
@@ -37,7 +47,7 @@ void Scissors::setVerteces(vector<point> vs){
 }
 
 void Scissors::draw() const {
-#ifdef __APPLE__:
+#ifdef __APPLE__
     glBegin(GL_TRIANGLE_FAN);
     glColor3f(1, 1, 1);
     draw_point(verteces[4]);
@@ -53,6 +63,11 @@ void Scissors::draw() const {
     draw_point(verteces[6]);
     draw_point(verteces[7]);
     draw_point(verteces[8]);
+
+    draw_point(verteces[13]);
+    draw_point(verteces[14]);
+    draw_point(verteces[15]);
+    draw_point(verteces[16]);
     glEnd();
 
     glBegin(GL_QUADS);
@@ -61,6 +76,11 @@ void Scissors::draw() const {
     draw_point(verteces[10]);
     draw_point(verteces[11]);
     draw_point(verteces[12]);
+
+    draw_point(verteces[17]);
+    draw_point(verteces[18]);
+    draw_point(verteces[19]);
+    draw_point(verteces[20]);
     glEnd();
 #else
     glBegin(GL_QUADS);
@@ -69,6 +89,11 @@ void Scissors::draw() const {
     draw_point(verteces[10]);
     draw_point(verteces[11]);
     draw_point(verteces[12]);
+
+    draw_point(verteces[17]);
+    draw_point(verteces[18]);
+    draw_point(verteces[19]);
+    draw_point(verteces[20]);
     glEnd();
 
     glBegin(GL_QUADS);
@@ -77,6 +102,11 @@ void Scissors::draw() const {
     draw_point(verteces[6]);
     draw_point(verteces[7]);
     draw_point(verteces[8]);
+
+    draw_point(verteces[13]);
+    draw_point(verteces[14]);
+    draw_point(verteces[15]);
+    draw_point(verteces[16]);
     glEnd();
 
     glBegin(GL_TRIANGLE_FAN);
