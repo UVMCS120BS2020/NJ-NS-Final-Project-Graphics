@@ -34,7 +34,7 @@ void Scissors::setTimesWon(int w){
 }
 
 void Scissors::draw() const {
-    glBegin(GL_QUADS);
+    glBegin(GL_TRIANGLE_FAN);
     glColor3f(1, 0, 0);
     draw_point(verteces[0]);
     draw_point(verteces[3]);

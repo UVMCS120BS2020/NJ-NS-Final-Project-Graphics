@@ -12,13 +12,15 @@ Rock::Rock() {
     color = "grey";
     timesWon = 0;
     verteces.resize(13);
-    verteces[0] = {-50,0}; //down right
-    verteces[1] = {-180,0}; //down left
-    verteces[2] = {-130,40}; //up left
-    verteces[3] = {-100,40}; //up right
+    verteces[0] = {-50,0};
+    verteces[1] = {-180,0};
+    verteces[2] = {-130,40};
+    verteces[3] = {-100,40};
     verteces[4] = {-115,45};
     verteces[5] = {-155,30};
     verteces[6] = {-75,30};
+    verteces[7] = {-48,-10};
+    verteces[8] = {-182, -10};
 }
 
 vector<point> Rock::getVerteces(){
@@ -39,13 +41,19 @@ void Rock::setTimesWon(int w){
 
 void Rock::draw() const {
     glBegin(GL_TRIANGLE_FAN);
-    glColor3f(1, 1, 0);
+    glColor3f(0.4, 0.4, 0.4);
+    draw_point(verteces[7]);
     draw_point(verteces[0]);
+    glColor3f(0.3, 0.3, 0.3);
     draw_point(verteces[6]);
     draw_point(verteces[3]);
+    glColor3f(0.5, 0.5, 0.5);
     draw_point(verteces[4]);
     draw_point(verteces[2]);
+    glColor3f(0.4, 0.4, 0.4);
     draw_point(verteces[5]);
     draw_point(verteces[1]);
+    glColor3f(0.3, 0.3, 0.3);
+    draw_point(verteces[8]);
     glEnd();
 }
