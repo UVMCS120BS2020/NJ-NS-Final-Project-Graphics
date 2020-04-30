@@ -6,8 +6,7 @@
 #include <memory>
 #include <iostream>
 #include <vector>
-#include <bits/stdc++.h>
-//#include <GL/freeglut.h>
+#include "stdc++.h"
 
 using namespace std;
 
