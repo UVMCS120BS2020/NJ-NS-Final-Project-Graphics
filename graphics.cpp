@@ -3,9 +3,10 @@
 #include "rock.h"
 #include "paper.h"
 #include "scissors.h"
+#include <memory>
 #include <iostream>
 #include <vector>
-#include <GL/glut.h>
+#include <GL/freeglut.h>
 using namespace std;
 
 GLdouble width, height;
@@ -16,7 +17,7 @@ Scissors p1_s;
 Rock p2_r;
 Paper p2_p;
 Scissors p2_s;
-vector<Item> items_vec;
+vector<unique_ptr<Item>> items_vec;
 bool draw_p1_rock = false;
 bool draw_p1_paper = false;
 bool draw_p1_scissors = false;
@@ -30,6 +31,15 @@ bool p2_chose = false;
 void init() {
     width = 500;
     height = 500;
+}
+
+/* Function taken from StackOverflow here:
+ * https://stackoverflow.com/questions/538661/how-do-i-draw-text-with-glut-opengl-in-c */
+void PrintString(float x, float y, void *font, const unsigned char* string){
+    char *c;
+    glColor3f(1.0, 1.0, 1.0);
+    glRasterPos2f(x,y);
+    glutBitmapString(font,string);
 }
 
 /* Initialize OpenGL Graphics */
@@ -64,22 +74,34 @@ void display() {
     /*
      * Draw here
      */
-    if(show_round){
-        if(draw_p1_rock)
-            p1_r.draw();
-        if(draw_p1_paper)
-            p1_p.draw();
-        if(draw_p1_scissors)
-            p1_s.draw();
-        if(draw_p2_rock)
-            p2_r.draw();
-        if(draw_p2_paper)
-            p2_p.draw();
-        if(draw_p2_scissors)
-            p2_s.draw();
+
+    PrintString(-100, 200, GLUT_BITMAP_8_BY_13, reinterpret_cast<const unsigned char *>("Rock Paper scissors!"));
+    PrintString(-160, 185, GLUT_BITMAP_8_BY_13, reinterpret_cast<const unsigned char *>("Player 1: a = rock s = paper d = scissors"));
+    PrintString(-170, 170, GLUT_BITMAP_8_BY_13, reinterpret_cast<const unsigned char *>("Player 2: <- = rock V = paper -> = scissors"));
+    PrintString(-170, 155, GLUT_BITMAP_8_BY_13, reinterpret_cast<const unsigned char *>("Both players select item and press p"));
+    PrintString(-170, 140, GLUT_BITMAP_8_BY_13, reinterpret_cast<const unsigned char *>("When round is over, press c to clear the board"));
+
+
+    if(show_round && (p1_chose && p2_chose)){
+        if(draw_p1_rock) {
+            items_vec[0]->draw();
+        }
+        if(draw_p1_paper) {
+            items_vec[1]->draw();
+        }
+        if(draw_p1_scissors) {
+            items_vec[2]->draw();
+        }
+        if(draw_p2_rock) {
+            items_vec[3]->draw();
+        }
+        if(draw_p2_paper) {
+            items_vec[4]->draw();
+        }
+        if(draw_p2_scissors) {
+            items_vec[5]->draw();
+        }
     }
-    cout << show_round << endl;
-    cout << draw_p1_rock << endl;
     glFlush();  // Render now
 }
 
@@ -109,6 +131,8 @@ void kbd(unsigned char key, int x, int y) {
             break;
         case 'c':
             show_round = false;
+            p1_chose = false;
+            p2_chose = false;
             draw_p1_rock = false;
             draw_p1_paper = false;
             draw_p1_scissors = false;
@@ -180,14 +204,13 @@ int main(int argc, char** argv) {
     }
     p2_s.setVerteces(modVert);
 
-    /*items_vec.resize(5);
-    items_vec[0] = p1_r;
-    items_vec[1] = p1_p;
-    items_vec[2] = p1_s;
-    items_vec[3] = p2_r;
-    items_vec[4] = p2_p;
-    items_vec[5] = p2_s;
-     */
+    items_vec.push_back(make_unique<Rock>(p1_r));
+    items_vec.push_back(make_unique<Paper>(p1_p));
+    items_vec.push_back(make_unique<Scissors>(p1_s));
+    items_vec.push_back(make_unique<Rock>(p2_r));
+    items_vec.push_back(make_unique<Paper>(p2_p));
+    items_vec.push_back(make_unique<Scissors>(p2_s));
+
 
 
     init();
