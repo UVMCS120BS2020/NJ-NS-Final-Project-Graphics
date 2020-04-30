@@ -10,7 +10,7 @@ using namespace std;
 
 Rock::Rock() {
     color = "grey";
-    verteces.resize(13);
+    verteces.resize(9);
     verteces[0] = {-50,0};
     verteces[1] = {-180,0};
     verteces[2] = {-130,40};
