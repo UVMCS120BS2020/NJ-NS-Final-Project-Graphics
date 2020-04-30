@@ -16,6 +16,7 @@ Scissors p1_s;
 Rock p2_r;
 Paper p2_p;
 Scissors p2_s;
+vector<Item> items_vec;
 bool draw_p1_rock = false;
 bool draw_p1_paper = false;
 bool draw_p1_scissors = false;
@@ -23,6 +24,8 @@ bool draw_p2_rock = false;
 bool draw_p2_paper = false;
 bool draw_p2_scissors = false;
 bool show_round = false;
+bool p1_chose = false;
+bool p2_chose = false;
 
 void init() {
     width = 500;
@@ -32,7 +35,7 @@ void init() {
 /* Initialize OpenGL Graphics */
 void initGL() {
     // Set "clearing" or background color
-    glClearColor(0.0f, 0.0f, 0.0f, 1.0f); // Black and opaque
+    glClearColor(0.0f, 0.0f, 0.0f, 1.0f); // Background window color... TODO right now it only changes color after redisplay is called
     glEnable(GL_DEPTH_TEST);
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
@@ -41,35 +44,19 @@ void initGL() {
               0.0, 1.0, 0.0); // up vector
 }
 
-/*void draw_axes() {
-    glLineWidth(2.0);
-    glBegin(GL_LINES);
-    glColor3f(1.0, 0.0, 0.0);
-    glVertex3f(-width/2.0, 0.0, 0.0);
-    glVertex3f(width/2.0, 0.0, 0.0);
-    glColor3f(0.0, 1.0, 0.0);
-    glVertex3f(0.0, height/2.0, 0.0);
-    glVertex3f(0.0, -height/2.0, 0.0);
-    glColor3f(0.0, 0.0, 1.0);
-    glVertex3f(0.0, 0.0, width);
-    glVertex3f(0.0, 0.0, -width);
-    glEnd();
-}
- */
 
 /* Handler for window-repaint event. Call back when the window first appears and
  whenever the window needs to be re-painted. */
 void display() {
-
     // tell OpenGL to use the whole window for drawing
     glViewport(0, 0, width, height);
 
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
     glOrtho(-width/2, width/2, -height/2, height/2, -width, width);
-    
+
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);   // Clear the color buffer with current clearing color
-    
+
     glEnable(GL_DEPTH);
     glEnable(GL_CULL_FACE);
     glPolygonMode(GL_FRONT, GL_FILL);
@@ -91,7 +78,8 @@ void display() {
         if(draw_p2_scissors)
             p2_s.draw();
     }
-    
+    cout << show_round << endl;
+    cout << draw_p1_rock << endl;
     glFlush();  // Render now
 }
 
@@ -106,15 +94,27 @@ void kbd(unsigned char key, int x, int y) {
     switch(key) {
         case 'a':
             draw_p1_rock = true;
+            p1_chose = true;
             break;
         case 's':
             draw_p1_paper = true;
+            p1_chose = true;
             break;
         case 'd':
             draw_p1_scissors = true;
+            p1_chose = true;
             break;
         case 'p':
             show_round = true;
+            break;
+        case 'c':
+            show_round = false;
+            draw_p1_rock = false;
+            draw_p1_paper = false;
+            draw_p1_scissors = false;
+            draw_p2_rock = false;
+            draw_p2_paper = false;
+            draw_p2_scissors = false;
             break;
 
     }
@@ -126,12 +126,15 @@ void kbdS(int key, int x, int y) {
     switch(key) {
         case GLUT_KEY_LEFT:
             draw_p2_rock = true;
+            p2_chose = true;
             break;
         case GLUT_KEY_DOWN:
             draw_p2_paper = true;
+            p2_chose = true;
             break;
         case GLUT_KEY_RIGHT:
             draw_p2_scissors = true;
+            p2_chose = true;
             break;
     }
     
@@ -158,7 +161,35 @@ void timer(int dummy) {
 
 /* Main function: GLUT runs as a console application starting at main()  */
 int main(int argc, char** argv) {
-    
+
+    vector<point> modVert = p1_r.getVerteces();
+    for(auto & i : modVert){
+        i.x += 220;
+    }
+    p2_r.setVerteces(modVert);
+
+    modVert = p1_p.getVerteces();
+    for(auto & i : modVert){
+        i.x += 220;
+    }
+    p2_p.setVerteces(modVert);
+
+    modVert = p1_s.getVerteces();
+    for(auto & i : modVert){
+        i.x += 220;
+    }
+    p2_s.setVerteces(modVert);
+
+    /*items_vec.resize(5);
+    items_vec[0] = p1_r;
+    items_vec[1] = p1_p;
+    items_vec[2] = p1_s;
+    items_vec[3] = p2_r;
+    items_vec[4] = p2_p;
+    items_vec[5] = p2_s;
+     */
+
+
     init();
     
     glutInit(&argc, argv);          // Initialize GLUT
@@ -168,7 +199,7 @@ int main(int argc, char** argv) {
     glutInitWindowSize((int)width, (int)height);
     glutInitWindowPosition(100, 200); // Position the window's initial top-left corner
     /* create the window and store the handle to it */
-    wd = glutCreateWindow("3D Graphics!" /* title */ );
+    wd = glutCreateWindow("Rock, Paper, Scissor game!" /* title */ );
     
     // Register callback handler for window re-paint event
     glutDisplayFunc(display);

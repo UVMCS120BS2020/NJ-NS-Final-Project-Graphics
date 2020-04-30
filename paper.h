@@ -16,9 +16,9 @@ private:
 public:
     Paper();
 
-    std::string getColor() const;
+    std::vector<point> getVerteces();
 
-    void setColor(std::string c);
+    void setVerteces(std::vector<point> vs);
 
     int getTimesWon() const;
 

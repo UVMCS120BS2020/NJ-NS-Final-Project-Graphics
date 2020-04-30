@@ -32,15 +32,15 @@ void display();
 void kbd(unsigned char key, int x, int y);
 
 // Trap and process special keyboard events
-//void kbdS(int key, int x, int y);
+void kbdS(int key, int x, int y);
 
 // Handle "mouse cursor moved" events 
-//void cursor(int x, int y);
+void cursor(int x, int y);
 
 // Calls itself after a specified time
-//void timer(int dummy);
+void timer(int dummy);
 
 // Handle mouse button pressed and released events
-//void mouse(int button, int state, int x, int y);
+void mouse(int button, int state, int x, int y);
 
 #endif /* graphics_h */

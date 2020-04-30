@@ -12,18 +12,18 @@ Paper::Paper() {
     color = "white";
     timesWon = 0;
     verteces.resize(13);
-    verteces[0] = {50,0};
-    verteces[1] = {20,0};
-    verteces[2] = {20,50};
-    verteces[3] = {50,50};
+    verteces[0] = {-110,0};
+    verteces[1] = {-140,0};
+    verteces[2] = {-140,30};
+    verteces[3] = {-110,30};
 }
 
-string Paper::getColor() const{
-    return color;
+vector<point> Paper::getVerteces(){
+    return verteces;
 }
 
-void Paper::setColor(string c){
-    color = c;
+void Paper::setVerteces(vector<point> vs){
+    verteces = vs;
 }
 
 int Paper::getTimesWon() const{

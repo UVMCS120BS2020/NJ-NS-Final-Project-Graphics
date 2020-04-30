@@ -12,18 +12,18 @@ Rock::Rock() {
     color = "grey";
     timesWon = 0;
     verteces.resize(13);
-    verteces[0] = {0,0}; //down right
-    verteces[1] = {-50,0}; //down left
-    verteces[2] = {-50,50}; //up left
-    verteces[3] = {0,50}; //up right
+    verteces[0] = {-150,0}; //down right
+    verteces[1] = {-180,0}; //down left
+    verteces[2] = {-180,30}; //up left
+    verteces[3] = {-150,30}; //up right
 }
 
-string Rock::getColor(){
-    return color;
+vector<point> Rock::getVerteces(){
+    return verteces;
 }
 
-void Rock::setColor(string c){
-    color = c;
+void Rock::setVerteces(vector<point> vs){
+    verteces = vs;
 }
 
 int Rock::getTimesWon() const{

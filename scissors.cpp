@@ -11,18 +11,18 @@ Scissors::Scissors() {
     color = "red";
     timesWon = 0;
     verteces.resize(13);
-    verteces[0] = {100,0};
-    verteces[1] = {70,0};
-    verteces[2] = {70,50};
-    verteces[3] = {100,50};
+    verteces[0] = {-70,0};
+    verteces[1] = {-100,0};
+    verteces[2] = {-100,30};
+    verteces[3] = {-70,30};
 }
 
-string Scissors::getColor() const{
-    return color;
+vector<point> Scissors::getVerteces(){
+    return verteces;
 }
 
-void Scissors::setColor(string c){
-    color = c;
+void Scissors::setVerteces(vector<point> vs){
+    verteces = vs;
 }
 
 int Scissors::getTimesWon() const{
