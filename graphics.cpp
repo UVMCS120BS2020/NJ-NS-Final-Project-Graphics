@@ -24,9 +24,12 @@ bool draw_p1_scissors = false;
 bool draw_p2_rock = false;
 bool draw_p2_paper = false;
 bool draw_p2_scissors = false;
-bool show_round = false;
 bool p1_chose = false;
 bool p2_chose = false;
+int p1_wins = 0;
+int p2_wins = 0;
+char p1_choice;
+char p2_choice;
 
 void init() {
     width = 500;
@@ -78,28 +81,78 @@ void display() {
     PrintString(-100, 200, GLUT_BITMAP_8_BY_13, reinterpret_cast<const unsigned char *>("Rock Paper scissors!"));
     PrintString(-160, 185, GLUT_BITMAP_8_BY_13, reinterpret_cast<const unsigned char *>("Player 1: a = rock s = paper d = scissors"));
     PrintString(-170, 170, GLUT_BITMAP_8_BY_13, reinterpret_cast<const unsigned char *>("Player 2: <- = rock V = paper -> = scissors"));
-    PrintString(-170, 155, GLUT_BITMAP_8_BY_13, reinterpret_cast<const unsigned char *>("Both players select item and press p"));
-    PrintString(-170, 140, GLUT_BITMAP_8_BY_13, reinterpret_cast<const unsigned char *>("When round is over, press c to clear the board"));
+    PrintString(-170, 155, GLUT_BITMAP_8_BY_13, reinterpret_cast<const unsigned char *>("When round is over, press c to clear the board"));
 
 
-    if(show_round && (p1_chose && p2_chose)){
+    PrintString(-170, 110, GLUT_BITMAP_8_BY_13, reinterpret_cast<const unsigned char *>("Player 1"));
+    //if(p1_wins < 0)
+    //    PrintString(-60+(p1_wins*13), 120, GLUT_BITMAP_8_BY_13, reinterpret_cast<const unsigned char *>("|"));
+    PrintString(70, 110, GLUT_BITMAP_8_BY_13, reinterpret_cast<const unsigned char *>("Player 2"));
+    //if(p2_wins > 0)
+    //    PrintString(180+(p2_wins*13), 120, GLUT_BITMAP_8_BY_13, reinterpret_cast<const unsigned char *>("|"));
+
+
+
+    if(p1_chose && p2_chose){
         if(draw_p1_rock) {
             items_vec[0]->draw();
+            p1_choice = 'r';
         }
         if(draw_p1_paper) {
             items_vec[1]->draw();
+            p1_choice = 'p';
         }
         if(draw_p1_scissors) {
             items_vec[2]->draw();
+            p1_choice = 's';
         }
         if(draw_p2_rock) {
             items_vec[3]->draw();
+            p2_choice = 'r';
         }
         if(draw_p2_paper) {
             items_vec[4]->draw();
+            p2_choice = 'p';
         }
         if(draw_p2_scissors) {
             items_vec[5]->draw();
+            p2_choice = 's';
+        }
+
+        switch(p1_choice){
+            case 'r':
+                if(p2_choice == 'r') {
+                    PrintString(-200, -200, GLUT_BITMAP_8_BY_13, reinterpret_cast<const unsigned char *>("Draw!"));
+                } else if(p2_choice == 'p'){
+                    PrintString(-200, -200, GLUT_BITMAP_8_BY_13,reinterpret_cast<const unsigned char *>("Player 2 wins!"));
+                    p2_wins++;
+                } else{
+                    PrintString(-200, -200, GLUT_BITMAP_8_BY_13,reinterpret_cast<const unsigned char *>("Player 1 wins!"));
+                    p1_wins++;
+                }
+                break;
+            case 'p':
+                if(p2_choice == 'r') {
+                    PrintString(-200, -200, GLUT_BITMAP_8_BY_13,reinterpret_cast<const unsigned char *>("Player 1 wins!"));
+                    p1_wins++;
+                } else if(p2_choice == 'p'){
+                    PrintString(-200, -200, GLUT_BITMAP_8_BY_13, reinterpret_cast<const unsigned char *>("Draw!"));
+                } else{
+                    PrintString(-200, -200, GLUT_BITMAP_8_BY_13,reinterpret_cast<const unsigned char *>("Player 2 wins!"));
+                    p2_wins++;
+                }
+                break;
+            case 's':
+                if(p2_choice == 'r') {
+                    PrintString(-200, -200, GLUT_BITMAP_8_BY_13,reinterpret_cast<const unsigned char *>("Player 2 wins!"));
+                    p2_wins++;
+                } else if(p2_choice == 'p'){
+                    PrintString(-200, -200, GLUT_BITMAP_8_BY_13,reinterpret_cast<const unsigned char *>("Player 1 wins!"));
+                    p1_wins++;
+                } else{
+                    PrintString(-200, -200, GLUT_BITMAP_8_BY_13, reinterpret_cast<const unsigned char *>("Draw!"));
+                }
+                break;
         }
     }
     glFlush();  // Render now
@@ -126,11 +179,7 @@ void kbd(unsigned char key, int x, int y) {
             draw_p1_scissors = true;
             p1_chose = true;
             break;
-        case 'p':
-            show_round = true;
-            break;
         case 'c':
-            show_round = false;
             p1_chose = false;
             p2_chose = false;
             draw_p1_rock = false;
