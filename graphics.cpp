@@ -38,12 +38,8 @@ void init() {
 }
 
 /* Function taken from StackOverflow here:
- * https://stackoverflow.com/questions/538661/how-do-i-draw-text-with-glut-opengl-in-c */
+ * https://stackoverflow.com/questions/54078894/glutbitmapcharacter-text-not-appearing-on-screen */
 void PrintString(float x, float y, void *font, const unsigned char* string){
-    //char *c;
-    //glColor3f(1.0, 1.0, 1.0);
-    //glRasterPos2f(x,y);
-    //glutBitmapString(font,string);
     char *c;
     int x1 = x;
     for (c = (char *) string; *c != '\0'; c++) {
